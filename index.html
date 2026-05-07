@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Viewer - Premium UI</title>
+    <title>Get Your Key - Sophisticated UI</title>
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --bg: #0f0c29;
+            --primary-gradient: linear-gradient(135deg, #8e2de2, #4a00e0);
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --border-glass: rgba(255, 255, 255, 0.15);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
         body {
@@ -23,162 +23,178 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
+            background: #0b0b0f;
+            color: #ffffff;
             overflow: hidden;
         }
 
-        /* Hiệu ứng đốm sáng nền */
-        .circle {
+        /* Nền mờ ảo */
+        body::before {
+            content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
+            width: 350px;
+            height: 350px;
+            background: #4a00e0;
+            filter: blur(140px);
             border-radius: 50%;
-            z-index: 0;
+            top: 20%;
+            left: 20%;
+            z-index: -1;
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 24px;
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            padding: 40px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 420px;
             text-align: center;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 450px;
-            animation: fadeIn 0.8s ease-out;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.6s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h2 {
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            color: var(--secondary);
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .key-box {
-            background: rgba(0, 0, 0, 0.3);
+        p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 25px;
+        }
+
+        /* Khu vực hiển thị Key */
+        .key-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .key-container:hover {
+            border-color: #8e2de2;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #keyValue {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #00d2ff;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+
+        .copy-hint {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #8e2de2;
+            font-weight: 600;
+        }
+
+        /* Nút Copy */
+        .btn {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            width: 100%;
             padding: 15px;
             border-radius: 12px;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            margin: 20px 0;
-            font-size: 1.2rem;
-            font-family: 'Courier New', Courier, monospace;
-            word-break: break-all;
+            font-weight: bold;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .key-box:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--secondary);
-        }
-
-        .btn-copy {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
             transition: 0.3s;
-            width: 100%;
+            text-transform: uppercase;
         }
 
-        .btn-copy:hover {
-            background: #5b49cf;
-            transform: scale(1.02);
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(142, 45, 226, 0.4);
         }
 
-        .btn-copy:active {
-            transform: scale(0.98);
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            opacity: 0.6;
-        }
-
-        /* Thông báo nhỏ */
-        #toast {
-            visibility: hidden;
-            min-width: 200px;
-            background-color: #00b894;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 10px;
+        /* Thông báo nhỏ khi copy */
+        .toast {
             position: fixed;
-            z-index: 5;
-            bottom: 30px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
+            background: #fff;
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.5s;
+            z-index: 100;
         }
 
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        .toast.show {
+            top: 30px;
         }
-
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body>
 
-    <div class="circle"></div>
+    <div class="toast" id="toast">Copied to clipboard! ✓</div>
 
-    <div class="container">
-        <h2>Your Access Key</h2>
-        <div class="key-box" id="keyDisplay" title="Click to copy">
-            Đang tải key...
+    <div class="card">
+        <h1>Your Key</h1>
+        <p>Click on the box or button below to copy</p>
+        
+        <div class="key-container" id="copyBox" onclick="copyAction()">
+            <span id="keyValue">NO KEY FOUND</span>
+            <span class="copy-hint">CLICK TO COPY</span>
         </div>
-        <button class="btn-copy" onclick="copyKey()">Copy Key</button>
-        <div class="footer">© 2026 Developed by You</div>
+
+        <button class="btn" onclick="copyAction()">Copy Now</button>
     </div>
 
-    <div id="toast">Đã sao chép vào bộ nhớ!</div>
-
     <script>
-        // Hàm lấy giá trị từ tham số URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        const key = getQueryParam('key');
-        const display = document.getElementById('keyDisplay');
+        // Lấy key từ URL ?key=ABC
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+        const display = document.getElementById('keyValue');
 
         if (key) {
             display.innerText = key;
-        } else {
-            display.innerText = "Không tìm thấy Key";
-            display.style.color = "#ff7675";
         }
 
-        // Hàm copy
-        function copyKey() {
-            const textToCopy = display.innerText;
+        // Xử lý hành động copy
+        function copyAction() {
+            const text = display.innerText;
             if (key) {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    const toast = document.getElementById("toast");
-                    toast.className = "show";
-                    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast();
                 });
+            } else {
+                alert("Không có key để copy!");
             }
+        }
+
+        // Hiện thông báo
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
         }
     </script>
 </body>
